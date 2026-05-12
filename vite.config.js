@@ -8,7 +8,7 @@ const base = process.env.VITE_BASE || './'
 
 export default defineConfig({
   plugins: [react()],
-  base:'/sono-monitor/',
+  base:'/Sono-monitor/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
