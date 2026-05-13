@@ -25,15 +25,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          # REMOVIDO: cache: npm
+          # (requer package-lock.json que não existe no repo)
 
       - name: Install dependencies
         run: npm install
 
       - name: Build
-        # VITE_BASE must match your GitHub repo name
-        # e.g. if repo is github.com/username/elite-sleep-pwa → /elite-sleep-pwa/
-        run: VITE_BASE=/${{ github.event.repository.name }}/ npm run build
+        run: npm run build
+        env:
+          VITE_BASE: /Sono-monitor/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
