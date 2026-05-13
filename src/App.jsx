@@ -435,10 +435,20 @@ function SettingsTab({ p, pwa, setPwa, onEdit, onReset }) {
   const [installed, setInstalled] = useState(false)
 
   useEffect(() => {
-    const handler = e => { e.preventDefault(); setDeferredPrompt(e) }
-    window.addEventListener('beforeinstallprompt', handler)
-    window.addEventListener('appinstalled', () => setInstalled(true))
-    return () => window.removeEventListener('beforeinstallprompt', handler)
+  // Lê o evento se já foi capturado antes do mount
+  if (window.__deferredInstallPrompt) {
+    setDeferredPrompt(window.__deferredInstallPrompt);
+  }
+  // Ou aguarda o evento se ainda não disparou
+  const handler = () => setDeferredPrompt(window.__deferredInstallPrompt);
+  window.addEventListener('pwa-installable', handler);
+  window.addEventListener('appinstalled', () => {
+    setInstalled(true);
+    window.__deferredInstallPrompt = null;
+  });
+  return () => window.removeEventListener('pwa-installable', handler);
+}, []);
+    
   }, [])
 
   async function reqNotif() {
