@@ -23,8 +23,6 @@ const STATIC_ASSETS = [
   './icons/shortcut-sestas.png',
   './icons/shortcut-treino.png',
   // Vite build outputs (stable names via vite.config.js)
-  './assets/index.js',
-  './assets/index.css',
 ];
 
 // ── INSTALL ────────────────────────────────────────────────────
