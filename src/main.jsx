@@ -26,7 +26,14 @@ const params = new URLSearchParams(window.location.search);
 const tabParam = params.get('tab');
 if (tabParam === 'sestas') window.__initialTab = 3;
 if (tabParam === 'treino') window.__initialTab = 2;
-
+// Captura o evento ANTES do React montar
+window.__deferredInstallPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  window.__deferredInstallPrompt = e;
+  // Notifica o React se já estiver montado
+  window.dispatchEvent(new Event('pwa-installable'));
+});
 // ── Render ─────────────────────────────────────────────────────
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
