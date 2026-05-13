@@ -6,7 +6,7 @@
   "lang": "pt-PT",
   "dir": "ltr",
   "start_url": "/Sono-monitor/",
-  "scope": "/sono-monitor/",
+  "scope": "/Sono-monitor/",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui", "browser"],
   "orientation": "portrait",
