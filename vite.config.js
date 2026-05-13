@@ -4,11 +4,11 @@ import react from '@vitejs/plugin-react'
 // Set BASE_URL env var to your repo name for GitHub Pages subdirectory deploys
 // e.g. VITE_BASE=/elite-sleep-pwa/ npm run build
 // For root domain deploys (custom domain / username.github.io) leave as './'
-const base = process.env.VITE_BASE || './'
+const base = process.env.VITE_BASE || '/Sono-monitor/'
 
 export default defineConfig({
   plugins: [react()],
-  base:'/Sono-monitor/',
+  base: base,
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
