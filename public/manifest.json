@@ -17,31 +17,31 @@
 
   "icons": [
     {
-      "src": "/Sono-monitor/icons/icon-192x192.png",
+      "src": "icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/Sono-monitor/icons/icon-512x512.png",
+      "src": "icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/Sono-monitor/icons/icon-maskable-192x192.png",
+      "src": "icons/icon-maskable-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/Sono-monitor/icons/icon-maskable-512x512.png",
+      "src": "icons/icon-maskable-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/Sono-monitor/icons/icon-180x180.png",
+      "src": "icons/icon-180x180.png",
       "sizes": "180x180",
       "type": "image/png",
       "purpose": "any"
@@ -50,14 +50,14 @@
 
   "screenshots": [
     {
-      "src": "/Sono-monitor/icons/mobile.png",
+      "src": "icons/mobile.png",
       "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Painel de Prontidão — Elite Sleep"
     },
     {
-      "src": "/Sono-monitor/icons/desktop.png",
+      "src": "icons/desktop.png",
       "sizes": "1280x800",
       "type": "image/png",
       "form_factor": "wide",
@@ -73,7 +73,7 @@
       "url": "/Sono-monitor/?tab=sestas",
       "icons": [
         {
-          "src": "/Sono-monitor/icons/shortcut-sestas.png",
+          "src": "icons/shortcut-sestas.png",
           "sizes": "96x96",
           "type": "image/png"
         }
@@ -86,7 +86,7 @@
       "url": "/Sono-monitor/?tab=treino",
       "icons": [
         {
-          "src": "/Sono-monitor/icons/shortcut-treino.png",
+          "src": "icons/shortcut-treino.png",
           "sizes": "96x96",
           "type": "image/png"
         }
