@@ -1,49 +1,34 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 
-// ── PWA: captura beforeinstallprompt ANTES do React montar ─────
-// CRÍTICO: tem de ser a primeira coisa a correr
-window.__deferredInstallPrompt = null;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault(); // bloqueia o mini-infobar automático do Chrome
-  window.__deferredInstallPrompt = e;
-  window.dispatchEvent(new Event('pwa-installable'));
-  console.log('[PWA] ✓ beforeinstallprompt capturado');
-});
-
-window.addEventListener('appinstalled', () => {
-  window.__deferredInstallPrompt = null;
-  console.log('[PWA] ✓ App instalada');
-});
-
-// ── Handle shortcut URL params ─────────────────────────────────
-const params = new URLSearchParams(window.location.search);
-const tabParam = params.get('tab');
-if (tabParam === 'sestas') window.__initialTab = 3;
-if (tabParam === 'treino') window.__initialTab = 2;
-
-// ── Service Worker — caminho e scope ABSOLUTOS ─────────────────
-// CORRIGIDO: './sw.js' com scope './' falha no GitHub Pages
-// porque a base é /Sono-monitor/ — tem de ser absoluto
+// ── Service Worker Registration ─────────────────────────────────
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register('/Sono-monitor/sw.js', { scope: '/Sono-monitor/' })
       .then(reg => {
-        console.log('[SW] ✓ Registado. Scope:', reg.scope);
-        setInterval(() => {
-          if (document.visibilityState === 'visible') reg.update();
-        }, 60_000);
+        console.log('[SW] Registado:', reg.scope)
+
+        // Verifica actualizações a cada 60 seg quando o app está aberto
+        setInterval(() => reg.update(), 60_000)
+
+        reg.addEventListener('updatefound', () => {
+          const newSW = reg.installing
+          newSW?.addEventListener('statechange', () => {
+            if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
+              console.log('[SW] Nova versão disponível — recarrega para actualizar')
+            }
+          })
+        })
       })
-      .catch(err => console.error('[SW] ✗ Falha no registo:', err));
-  });
+      .catch(err => console.error('[SW] Registo falhou:', err))
+  })
 }
 
-// ── Render ─────────────────────────────────────────────────────
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+// ── Render ──────────────────────────────────────────────────────
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
     <App />
-  </React.StrictMode>
+  </StrictMode>
 )
